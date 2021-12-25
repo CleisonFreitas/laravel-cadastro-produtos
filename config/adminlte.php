@@ -129,7 +129,7 @@ return [
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-secondary',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-dark navbar-primary',
+    'classes_topnav' => 'navbar-light navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -226,8 +226,6 @@ return [
 
     'menu' => [
         // Navbar items:
-
-
         [
             'text'        => 'Dashboard',
             'route'         => 'dashboard',
@@ -237,7 +235,7 @@ return [
         ['header' => 'Administrativo'],
         [
             'text' => 'Produtos',
-            'url'  => 'admin/settings',
+            'route' => 'produto.index',
             'icon' => 'fas fa-list-alt mx-1',
         ],
         [

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTagController;
 use App\Http\Controllers\TagController;
@@ -25,8 +26,10 @@ require __DIR__.'/auth.php';
 
 
 Route::middleware(['auth'])->group(function () {
-    // View Inicial
-    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+
+
+    // Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Produtos
         Route::get('/product',                  [ProductController::class, 'index'])->name('produto.index');
