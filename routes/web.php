@@ -26,7 +26,7 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->group(function () {
     // View Inicial
-        Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
     // Produtos
         Route::get('/product',                  [ProductController::class, 'index'])->name('produto.index');
