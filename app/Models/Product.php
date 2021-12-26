@@ -18,4 +18,8 @@ class Product extends Model
             'name'
         ];
     public $timestamps = true;
+
+    public static function table(){
+        return datatables()->of(Product::query())->toJson();
+    }
 }

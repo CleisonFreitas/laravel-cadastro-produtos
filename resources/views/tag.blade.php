@@ -1,21 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Relação de Produtos')
+@section('title', 'Relação de Tags')
 
 @section('content_header')
-    <h1>Produtos</h1>
+    <h1>Tag</h1>
 @stop
 
 @section('content')
-    @include('pages_content.product_content')
+    @include('pages_content.tag_content')
 @stop
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.jqueryui.min.css">
 
-    <!-- Css Choices -->
-    <link rel="stylesheet" href="{{ asset('choices/assets/styles/choices.min.css') }}">
 @stop
 
 @section('js')
@@ -27,8 +25,5 @@
             $('#dataTable').DataTable();
         } );
     </script>
-    <!-- Js choices -->
-    <script src="{{ asset('choices/assets/scripts/.eslintrc.js') }}"></script>
-    <script src="{{ asset('choices/assets/scripts/choices.min.js') }}"></script>
-    <script src="{{ asset('choices/assets/scripts/select.js') }}"></script>
+
 @stop

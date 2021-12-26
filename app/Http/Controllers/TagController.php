@@ -7,6 +7,7 @@ use App\Http\Resources\TagResource;
 //use Illuminate\Http\Request;
 
 use App\Http\Requests\TagRequest;
+use Alert;
 
 class TagController extends Controller
 {
@@ -17,7 +18,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return TagResource::collection(Tag::all());
+        return view('tag');
     }
 
     /**
@@ -28,9 +29,14 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $tag = Tag::create($request->all());
+        try{
+            $tag = Tag::create($request->all());
 
-        return new TagResource($tag);
+        }catch(\Exception $e){
+            return redirect()->back()->with([toast()->error('Erro ao tentar cadastrar nova tag')]);
+        }
+
+        return redirect()->back()->with([toast()->success('Nova tag cadastrada com sucesso!')]);
     }
 
     /**
@@ -41,7 +47,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return new TagResource($tag);
+        return view('custom_tag');
     }
 
     /**

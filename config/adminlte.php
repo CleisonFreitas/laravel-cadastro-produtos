@@ -235,12 +235,12 @@ return [
         ['header' => 'Administrativo'],
         [
             'text' => 'Produtos',
-            'route' => 'produto.index',
+            'route' => 'product.index',
             'icon' => 'fas fa-list-alt mx-1',
         ],
         [
             'text' => 'Tags',
-            'url'  => 'admin/settings',
+            'route' => 'tag.index',
             'icon' => 'far fa-list-alt mx-1',
         ],
         ['header' => 'Relatórios'],

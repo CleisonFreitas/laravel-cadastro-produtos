@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('Product', ['produto' => Product::all()]);
+        return view('Product', ['produto' => Product::table()]);
     }
 
     /**
@@ -30,15 +30,11 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
         try{
-
             $product = Product::create($request->validated());
-
         }catch(\Exception $e){
-            return response()->json('Erro ao tentar cadastrar');
+            return redirect()->back()->response()->json('Erro ao tentar cadastrar',abort(404));
         }
-
 
         return new ProductResource($product);
     }
@@ -51,7 +47,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return new ProductResource($product);
+        return view('custom_product');
     }
 
     /**
