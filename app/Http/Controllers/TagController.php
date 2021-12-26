@@ -8,6 +8,7 @@ use App\Http\Resources\TagResource;
 
 use App\Http\Requests\TagRequest;
 use Alert;
+use Exception;
 
 class TagController extends Controller
 {
@@ -18,7 +19,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('tag');
+        return view('tag',['tag' => Tag::all()]);
     }
 
     /**
@@ -30,10 +31,10 @@ class TagController extends Controller
     public function store(TagRequest $request)
     {
         try{
-            $tag = Tag::create($request->all());
+            $tag = Tag::create($request->validated());
 
         }catch(\Exception $e){
-            return redirect()->back()->with([toast()->error('Erro ao tentar cadastrar nova tag')]);
+            return redirect()->back()->with([toast()->success('Nova tag cadastrada com sucesso!')]);
         }
 
         return redirect()->back()->with([toast()->success('Nova tag cadastrada com sucesso!')]);
@@ -45,9 +46,20 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
+
+    public function edit($id){
+        try{
+            $tag = Tag::findOrfail($id);
+        }catch(\Exception $e){
+            return response()->json('Registro de tag nao encontrado!');
+        }
+
+        return view('edit_tag',['tag' => $tag]);
+    }
+
     public function show(Tag $tag)
     {
-        return view('custom_tag');
+        return view('create_tag');
     }
 
     /**
@@ -59,11 +71,13 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, $id)
     {
-        $tag = Tag::findOrfail($id);
-
-        $tag->update($request->all());
-
-        return new TagResource($tag);
+        try{
+            $tag = Tag::findOrfail($id);
+            $tag->update($request->validated());
+        }catch(\Exception $e){
+            return response()->json('Registro nao encontrado!');
+        }
+        return redirect()->back()->with([toast()->info('Registro atualizado com sucesso!')]);
     }
 
     /**
@@ -74,10 +88,14 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::findOrfail($id);
-
-        $tag->detete();
-
-        return response()->json('Tag has been deleted');
+        try{
+            $tag = Tag::findOrfail($id);
+        }catch(\Exception $e){
+            throw new Exception();
+         //  return redirect()->back()->with([response()->json('ID nao encontrado')]);
+        }finally{
+            $tag->delete();
+            return redirect()->back()->with([toast()->info('Registro Excluído com sucesso')]);
+        }
     }
 }

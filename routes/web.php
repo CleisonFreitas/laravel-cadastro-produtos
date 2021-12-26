@@ -41,10 +41,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Tags
     Route::get('/tag',              [TagController::class, 'index'])->name('tag.index');
+    Route::post('tag/store',        [TagController::class, 'store'])->name('tag.store');
     Route::get('/tag/show',         [TagController::class, 'show'])->name('tag.show');
     Route::get('/tag/edit/{id}',    [TagController::class, 'edit'])->name('tag.edit');
-    Route::get('/tag/update/{id}',  [TagController::class, 'update'])->name('tag.update');
-    Route::get('/tag/delete/{id}',  [TagController::class, 'delete'])->name('tag.delete');
+    Route::put('/tag/update/{id}',  [TagController::class, 'update'])->name('tag.update');
+    Route::get('/tag/delete/{id}',  [TagController::class, 'destroy'])->name('tag.delete');
 
     // Product tag
     Route::get('/product_tag',              [ProductTagController::class, 'index'])->name('product_tag.index');

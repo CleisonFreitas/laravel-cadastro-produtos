@@ -27,4 +27,11 @@ class TagRequest extends FormRequest
             'name' => ['required','string','max:50']
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Campo Descrição é obrigatório',
+            'name.max' => 'Limite de caracteres ultrapassado',
+        ];
+    }
 }

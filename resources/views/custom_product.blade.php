@@ -18,5 +18,6 @@
     <script src="{{ asset('choices/assets/scripts/.eslintrc.js') }}"></script>
     <script src="{{ asset('choices/assets/scripts/choices.min.js') }}"></script>
     <script src="{{ asset('choices/assets/scripts/select.js') }}"></script>
+    @include('sweetalert::alert')
 
 @stop

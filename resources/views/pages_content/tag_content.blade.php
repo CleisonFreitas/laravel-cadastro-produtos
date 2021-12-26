@@ -31,22 +31,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($tag as $tag)
                             <tr>
-                                <td>1</td>
-                                <td>Presentes</td>
+                                <td>{{ $tag->id }}</td>
+                                <td>{{ $tag->name }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
+                                    <a href="{{ route('tag.edit',$tag->id) }}" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
+                                    <a href="{{ route('tag.delete',$tag->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Cafeteira</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

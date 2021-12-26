@@ -25,5 +25,6 @@
             $('#dataTable').DataTable();
         } );
     </script>
+    @include('sweetalert::alert')
 
 @stop
