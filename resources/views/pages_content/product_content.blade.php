@@ -31,22 +31,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Cafeteira</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Cafeteira</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
-                                </td>
-                            </tr>
+                            @foreach ($product as $product )
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>
+                                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
+                                        <a href="{{ route('product.delete',$product->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

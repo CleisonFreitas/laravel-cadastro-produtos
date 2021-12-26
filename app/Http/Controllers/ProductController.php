@@ -7,8 +7,10 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use Exception;
 use Faker\Core\Number;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\PseudoTypes\NumericString;
+use Alert;
 
 class ProductController extends Controller
 {
@@ -19,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('Product', ['produto' => Product::table()]);
+        return view('Product', ['product' => Product::all()]);
     }
 
     /**
@@ -33,10 +35,10 @@ class ProductController extends Controller
         try{
             $product = Product::create($request->validated());
         }catch(\Exception $e){
-            return redirect()->back()->response()->json('Erro ao tentar cadastrar',abort(404));
+            return response()->json('Erro ao tentar cadastrar',abort(404));
         }
 
-        return new ProductResource($product);
+        return redirect()->back()->with([toast()->success('Produto criado com sucesso!')]);
     }
 
     /**
@@ -45,9 +47,18 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
+    public function edit($id){
+        try{
+            $product = Product::findorFail($id);
+        }catch(\Exception $e){
+            return response()->json('Produto não encontrado');
+        }
+            return view('edit_product',['product' => Product::find($id)],['tag' => Tag::all()]);
+    }
     public function show(Product $product)
     {
-        return view('custom_product');
+        return view('create_product', ['tag' => Tag::all()]);
     }
 
     /**
@@ -57,20 +68,19 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         try{
             $product = Product::find($id);
 
-            $product->update($request->all());
+            $product->update($request->validated());
 
         }catch(\Exception $e){
 
             return response()->json($e->getMessage());
         }
 
-
-        return response()->json('Product has been updated');
+        return redirect()->back()->with([toast()->info('Produto atualizado com sucesso!')]);
     }
 
     /**
@@ -89,7 +99,6 @@ class ProductController extends Controller
             return response()->json($e->getMessage());
         }
 
-
-        return response()->json('Product has been deleted');
+        return redirect()->back()->with([toast()->info('Registro de produto excluído com sucesso!')]);
     }
 }

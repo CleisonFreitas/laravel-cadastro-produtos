@@ -24,7 +24,15 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail','required','numeric','max:50']
+            'name' => ['bail','required','max:50']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Campo obrigatório',
+            'name.max' => 'Capacidade máxima 50 caracteres'
         ];
     }
 }

@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/product/show',             [ProductController::class, 'show'])->name('product.show');
         Route::get('/product/edit/{id}',        [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/update/{id}',      [ProductController::class, 'update'])->name('product.update');
-        Route::get('/product/delete/{id}',      [ProductController::class, 'delete'])->name('product.delete');
+        Route::get('/product/delete/{id}',      [ProductController::class, 'destroy'])->name('product.delete');
 
     // Tags
     Route::get('/tag',              [TagController::class, 'index'])->name('tag.index');
@@ -50,6 +50,6 @@ Route::middleware(['auth'])->group(function () {
     // Product tag
     Route::get('/product_tag',              [ProductTagController::class, 'index'])->name('product_tag.index');
     Route::get('/product_tag/edit/{id}',    [ProductTagController::class, 'edit'])->name('product_tag.edit');
-    Route::get('/product_tag/update/{id}',  [ProductTagController::class, 'update'])->name('product_tag.update');
+    Route::put('/product_tag/update/{id}',  [ProductTagController::class, 'update'])->name('product_tag.update');
     Route::get('/product_tag/delete/{id}',  [ProductTagController::class, 'delete'])->name('product_tag.delete');
 });
