@@ -14,5 +14,7 @@ class Product_tag extends Model
         'product_id',
         'tag_id'
     ];
+
+
     public $timestamps = true;
 }

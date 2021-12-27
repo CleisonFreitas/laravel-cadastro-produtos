@@ -37,9 +37,37 @@
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         <a href="{{ route('product.edit',$product->id) }}" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                        <a href="{{ route('product.delete',$product->id) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
+                                        <a href="#" class="btn btn-info btn-sm" title="Adicionar Tag" data-toggle="modal" data-target="#p_{{ $product->id }}"><i class="fas fa-tags"></i></a>&nbsp;
+                                        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#d_{{ $product->id }}"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
                                     </td>
                                 </tr>
+                                
+                                <!-- Modal de exclusão-->
+                                <div class="modal fade" id="d_{{ $product->id }}" tabindex="-1" aria-labelledby="d_{{ $product->id }}_Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="d_{{ $product->id }}_Label">{{ $product->id }}-{{ $product->name }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h6><i class="fas fa-exclamation-triangle" style="color:red;"></i>&nbsp;Deseja realmente excluir esse registro?</h6>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não, cancelar</button>
+                                                <a href="{{ route('product.delete',$product->id) }}" class="btn btn-danger">Sim</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #Modal de Exclusão -->
                             @endforeach
                         </tbody>
                     </table>

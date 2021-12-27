@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Product_tag;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use Exception;
@@ -11,6 +12,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\PseudoTypes\NumericString;
 use Alert;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -21,7 +23,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('Product', ['product' => Product::all()]);
+        return view('Product',  ['product' => Product::all()],
+                                ['tag' => Tag::all()]);
     }
 
     /**
@@ -32,13 +35,37 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        try{
+        $product = Product::create($request->validated());
+        $product_id = $product->id;
+        foreach ($request->tag_id as $tag) {
+            DB::table('product_tag')->insert([
+                ['tag_id' => $tag, 'product_id' => $product->id],
+            ]);
+        }
+        
+        
+       
+        //    return Product_tag::create([$data]);
+        
+        
+
+           //     return redirect()->back()->with([toast()->success('Produto criado com sucesso!')]);
+        
+      /*  try{/*
             $product = Product::create($request->validated());
+            $product_id = $product->id;
+            
+         //   $data = $request->all();
+            
+            }
+            
+        //    dd($product_tag);
+            
         }catch(\Exception $e){
             return response()->json('Erro ao tentar cadastrar',abort(404));
-        }
+        }*/
 
-        return redirect()->back()->with([toast()->success('Produto criado com sucesso!')]);
+        
     }
 
     /**
