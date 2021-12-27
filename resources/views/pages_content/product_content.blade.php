@@ -41,7 +41,7 @@
                                         <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#d_{{ $product->id }}"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
                                     </td>
                                 </tr>
-                                
+
                                 <!-- Modal de exclusão-->
                                 <div class="modal fade" id="d_{{ $product->id }}" tabindex="-1" aria-labelledby="d_{{ $product->id }}_Label" aria-hidden="true">
                                     <div class="modal-dialog">

@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Product_tag;
 use App\Http\Requests\ProductRequest;
-use App\Http\Resources\ProductResource;
+//use App\Http\Resources\ProductResource;
 use Exception;
-use Faker\Core\Number;
+//use Faker\Core\Number;
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use phpDocumentor\Reflection\PseudoTypes\NumericString;
+//use Illuminate\Http\Request;
+//use phpDocumentor\Reflection\PseudoTypes\NumericString;
 use Alert;
 use Illuminate\Support\Facades\DB;
 
@@ -21,10 +21,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Exibindo Listagem de Produtos
     public function index()
     {
-        return view('Product',  ['product' => Product::all()],
-                                ['tag' => Tag::all()]);
+        try{
+            $product = Product::all();
+            $tag_old = Tag::all();
+        }catch(\Exception $e){
+            return response()->json('Conteudo nao encontrado');
+        }finally{
+            return view('Product',  compact('product','tag_old'));
+        }
     }
 
     /**
@@ -35,37 +42,21 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product = Product::create($request->validated());
-        $product_id = $product->id;
-        foreach ($request->tag_id as $tag) {
-            DB::table('product_tag')->insert([
-                ['tag_id' => $tag, 'product_id' => $product->id],
-            ]);
-        }
-        
-        
-       
-        //    return Product_tag::create([$data]);
-        
-        
-
-           //     return redirect()->back()->with([toast()->success('Produto criado com sucesso!')]);
-        
-      /*  try{/*
+        try{
             $product = Product::create($request->validated());
             $product_id = $product->id;
-            
-         //   $data = $request->all();
-            
+            foreach ($request->tag_id as $tag) {
+                DB::table('product_tag')->insert([
+                    ['tag_id' => $tag, 'product_id' => $product->id],
+                ]);
             }
-            
-        //    dd($product_tag);
-            
         }catch(\Exception $e){
-            return response()->json('Erro ao tentar cadastrar',abort(404));
-        }*/
+            return response()->json('Sequência já cadastrada');
 
-        
+        }finally{
+            return redirect()->back()->with([toast()->success('Produto Cadastrado com sucesso!')]);
+        }
+
     }
 
     /**
@@ -78,14 +69,22 @@ class ProductController extends Controller
     public function edit($id){
         try{
             $product = Product::findorFail($id);
+            $tag_old = Tag::etiqueta($id);
+
+            $etiqueta = Product_tag::novaetiqueta($id);
+
+
         }catch(\Exception $e){
             return response()->json('Produto não encontrado');
         }
-            return view('edit_product',['product' => Product::find($id)],['tag' => Tag::all()]);
+
+            return view('edit_product', compact('product','etiqueta','tag_old'));
     }
+    // Exibindo menu de Cadastro
     public function show(Product $product)
     {
-        return view('create_product', ['tag' => Tag::all()]);
+
+        return view('create_product', ['tag_old' => Tag::all()]);
     }
 
     /**
@@ -101,6 +100,17 @@ class ProductController extends Controller
             $product = Product::find($id);
 
             $product->update($request->validated());
+
+            $etiqueta = DB::table('product_tag')->where('product_id', $id)->delete();
+
+            // Verificando a existência de tag
+            if($request->tag_id !== null){
+            foreach ($request->tag_id as $tag) {
+                DB::table('product_tag')->insert([
+                    ['tag_id' => $tag, 'product_id' => $id],
+                ]);
+            }
+        }
 
         }catch(\Exception $e){
 

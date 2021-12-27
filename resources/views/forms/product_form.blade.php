@@ -13,9 +13,18 @@
                 <div class="col-12 col-sm-12 col-lg-12">
                     <label for="tag">Tag:</label>
                     <select name="tag_id[]" id="choices-1" class="custom-select" multiple>
-                    @foreach ($tag as $tag)
-                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                    @endforeach 
+                        @if (isset($tag_old))
+                            @foreach ($tag_old as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            @endforeach
+                        @endif
+
+                        @if (isset($etiqueta))
+                            @foreach ($etiqueta as $etiqueta)
+                                <option value="{{ $etiqueta->id }}" selected>{{ $etiqueta->name }}</option>
+                            @endforeach
+                        @endif
+
                     </select>
                 </div>
             </div>
