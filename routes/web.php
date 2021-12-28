@@ -52,4 +52,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/product_tag/edit/{id}',    [ProductTagController::class, 'edit'])->name('product_tag.edit');
     Route::put('/product_tag/update/{id}',  [ProductTagController::class, 'update'])->name('product_tag.update');
     Route::get('/product_tag/delete/{id}',  [ProductTagController::class, 'delete'])->name('product_tag.delete');
+    Route::get('/product_tag/pdf',          [ProductTagController::class, 'viewpdf'])->name('product_tag.pdf');
 });

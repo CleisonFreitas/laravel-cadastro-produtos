@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product_tag;
+use App\Models\Product;
 use App\Http\Resources\ProductTagResource;
 use App\Http\Requests\ProductTagRequest;
+use Dompdf\Adapter\PDFLib;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,8 @@ class ProductTagController extends Controller
      */
     public function index()
     {
-        return ProductTagResource::collection(Product_tag::all());
+     //   return ProductTagResource::collection(Product_tag::all());
+
     }
 
     /**
@@ -76,5 +79,17 @@ class ProductTagController extends Controller
 
         return response()->json('The register has been deleted!');
 
+    }
+
+    public function viewpdf(){
+        try{
+            $product = Product::all();
+           }catch(\Exception $e){
+               return response()->json('Nenhuma informação encontrada!');
+           }finally{
+               return \PDF::loadView('pdf.relatorio', compact('product'))
+                    ->setPaper('a4', 'landscape')
+                   ->download('relacao-produtos.pdf');
+           }
     }
 }

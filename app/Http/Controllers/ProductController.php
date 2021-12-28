@@ -25,8 +25,10 @@ class ProductController extends Controller
     public function index()
     {
         try{
+
             $product = Product::all();
             $tag_old = Tag::all();
+            
         }catch(\Exception $e){
             return response()->json('Conteudo nao encontrado');
         }finally{

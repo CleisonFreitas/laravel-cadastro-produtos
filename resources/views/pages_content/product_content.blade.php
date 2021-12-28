@@ -19,6 +19,11 @@
         </div>
     </div>
     <div class="card-body">
+        <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-lg-12">
+                <a href="{{ route('product_tag.pdf') }}" class="btn btn-danger btn-sm mb-2" title="Gerar Relatório" style="margin-left:80%;"><i class="fas fa-print"></i>&nbsp;Imprimir</a>
+            </div>
+        </div>
         <div class="row mt-2">
             <div class="col-12 col-sm-12 col-lg-12">
                 <div class="table-responsive">
@@ -37,7 +42,6 @@
                                     <td>{{ $product->name }}</td>
                                     <td>
                                         <a href="{{ route('product.edit',$product->id) }}" class="btn btn-secondary btn-sm"><i class="fas fa-edit" title="Editar registro"></i></a>&nbsp;
-                                        <a href="#" class="btn btn-info btn-sm" title="Adicionar Tag" data-toggle="modal" data-target="#p_{{ $product->id }}"><i class="fas fa-tags"></i></a>&nbsp;
                                         <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#d_{{ $product->id }}"><i class="fas fa-trash-alt" title="Excluir registro"></i></a>
                                     </td>
                                 </tr>
