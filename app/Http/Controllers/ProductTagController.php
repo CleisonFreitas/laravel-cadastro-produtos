@@ -9,6 +9,7 @@ use App\Http\Requests\ProductTagRequest;
 use Dompdf\Adapter\PDFLib;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductTagController extends Controller
 {
@@ -83,13 +84,21 @@ class ProductTagController extends Controller
 
     public function viewpdf(){
         try{
-            $product = Product::all();
-           }catch(\Exception $e){
+
+            $etiqueta = Product_tag::all();
+
+            foreach($etiqueta as $etiqueta){
+           //     $etiqueta = array($etiqueta);
+                $product_tag = Product_tag::relevancia();
+        //    }
+                }
+            }catch(\Exception $e){
                return response()->json('Nenhuma informação encontrada!');
            }finally{
-               return \PDF::loadView('pdf.relatorio', compact('product'))
+              return \PDF::loadView('pdf.relatorio',compact('product_tag'))
                     ->setPaper('a4', 'landscape')
                    ->download('relacao-produtos.pdf');
+
            }
     }
 }

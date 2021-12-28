@@ -30,19 +30,14 @@
             <tr>
                 <th>Tag</th>
                 <th>Quantidade de Produtos vinculados</th>
-                <th>Última atualização</th>
             </tr>
-            @foreach ($product as $product)
+            @foreach ($product_tag as $product)
             <tr>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->created_at }}</td>
-                <td>{{ $product->updated_at }}</td>
+                <td>{{ $product->contagem }}</td>
             </tr>
             @endforeach
-            <tr>
-                <th>Total tags: </th>
-                <th colspan="2">Total Produtos: </th>
-            </tr>
+
         </table>
 </body>
 </html>

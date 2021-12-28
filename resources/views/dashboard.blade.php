@@ -25,7 +25,7 @@
           url: "@chart('product_chart_r')",
           hooks: new ChartisanHooks()
                 .responsive()
-                .title('De 1 à 5!')
+                .title('Posicione o cursor em cima!')
                 .datasets([{ type: 'line', fill: false}, 'bar']),
             });
       </script>

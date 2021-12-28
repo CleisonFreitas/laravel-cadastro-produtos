@@ -27,5 +27,17 @@ class Product_tag extends Model
         return $novaetiqueta;
     }
 
+    public static function relevancia()
+    {
+        $relatorio = DB::SELECT(
+            'SELECT t.name, count(pt.product_id) as contagem
+            FROM  product_tag pt
+            INNER JOIN tag t on tag_id = t.id
+            WHERE pt.tag_id >= 1
+            GROUP BY t.name');
+
+        return $relatorio;
+    }
+
     public $timestamps = true;
 }

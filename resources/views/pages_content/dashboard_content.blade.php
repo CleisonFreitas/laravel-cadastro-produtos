@@ -1,6 +1,6 @@
 <div class="card shadow" style="border-radius: 5px;">
     <div class="card-header">
-        <h4>Nota de satisfação do cliente por período!</h4>
+        <h4>Quantidade de Tags adicionados por período!</h4>
     </div>
     <div class="card-body">
 
