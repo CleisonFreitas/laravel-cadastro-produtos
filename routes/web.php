@@ -16,11 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+/*Route::get('/', function () {
+    return view('auth.login');
+});*/
 
 require __DIR__.'/auth.php';
 
@@ -29,7 +27,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Dashboard
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/',          [DashboardController::class, 'index'])->name('dashboard');
+    //    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     // Produtos
         Route::get('/product',                          [ProductController::class, 'index'])->name('product.index');
@@ -49,8 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Product tag
     Route::get('/product_tag',              [ProductTagController::class, 'index'])->name('product_tag.index');
-    Route::get('/product_tag/edit/{id}',    [ProductTagController::class, 'edit'])->name('product_tag.edit');
-    Route::put('/product_tag/update/{id}',  [ProductTagController::class, 'update'])->name('product_tag.update');
-    Route::get('/product_tag/delete/{id}',  [ProductTagController::class, 'delete'])->name('product_tag.delete');
+
     Route::get('/product_tag/pdf',          [ProductTagController::class, 'viewpdf'])->name('product_tag.pdf');
 });

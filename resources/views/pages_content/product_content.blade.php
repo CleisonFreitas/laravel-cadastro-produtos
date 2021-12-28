@@ -19,11 +19,6 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row mt-1">
-            <div class="col-12 col-sm-12 col-lg-12">
-                <a href="{{ route('product_tag.pdf') }}" class="btn btn-danger btn-sm mb-2" title="Gerar Relatório" style="margin-left:80%;"><i class="fas fa-print"></i>&nbsp;Imprimir</a>
-            </div>
-        </div>
         <div class="row mt-2">
             <div class="col-12 col-sm-12 col-lg-12">
                 <div class="table-responsive">
