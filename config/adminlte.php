@@ -229,7 +229,7 @@ return [
         [
             'text'        => 'Home',
             'route'         => 'dashboard',
-            'icon'        => 'fas fa-tachometer-alt mx-1',
+            'icon'        => 'fas fa-home mx-1',
             'label_color' => 'primary',
         ],
         ['header' => 'Administrativo'],
